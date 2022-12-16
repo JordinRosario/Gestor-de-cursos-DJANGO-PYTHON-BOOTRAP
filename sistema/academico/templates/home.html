@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block tittle %} 
+Home
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Gestion de cursos</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'registrar_curso' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-gro py-2">
+                        <input type="text" id="txtcodigo" name="txtcodigo" class="form-control" placeholder="Codigo" minlength="6" maxlength="6" required>
+                    </div>
+
+                    <div class="form-gro py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" maxlength="50" required>
+                    </div>
+
+                    <div class="form-gro py-2">
+                        <input type="number" id="numcredito" name="numcredito" class="form-control" placeholder="Creditos" required>
+                    </div>
+                    <div class="form-gro">
+                        <div class="d-grid gap-2">
+                          <button type="submit" name="" id="" class="btn btn-info">Guardar</button>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de curso</h1>
+        <div class="table-resposive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Creditos</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in curso %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{ i.codigo }}</td>
+                        <td>{{ i.nombre }}</td>
+                        <td>{{ i.creditos }}</td>
+                        <td><a href="editarcurso/{{i.codigo}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarcurso/{{i.codigo}}" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock%}

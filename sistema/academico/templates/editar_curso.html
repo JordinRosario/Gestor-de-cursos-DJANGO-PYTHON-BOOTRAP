@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{%  block tittle %}Editar curso {% endblock %}
+
+
+{% block content %} 
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Edicion curso</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'edicion_curso' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-gro py-2">
+                        <input type="text" id="txtcodigo" name="txtcodigo" value="{{ curso.codigo }}" class="form-control" placeholder="Codigo" readonly minlength="6" maxlength="6" required>
+                    </div>
+
+                    <div class="form-gro py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{ curso.nombre}}" class="form-control" placeholder="Nombre" maxlength="50" required>
+                    </div>
+
+                    <div class="form-gro py-2">
+                        <input type="number" id="numcredito" name="numcredito" value="{{ curso.creditos}}" class="form-control" placeholder="Creditos" required>
+                    </div>
+                    <div class="form-gro">
+                        <div class="d-grid gap-2">
+                          <button type="submit" name="" id="" class="btn btn-info">Guardar</button>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
