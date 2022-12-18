@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block tittle %} Iniciar sesion {% endblock %}
+
+{% block content %}
+<form action="{% url 'iniciarsesion' %}" method="POST">
+    {% csrf_token %}
+    {{error}}
+    {{form.as_p}}
+    <input type="submit" value="iniciar sesion">
+</form>
+<br>
+<h5>Si no tienes cuenta</h5><a class="btn btn-outline-dark me-2 ms-auto" href="{% url 'registrarte' %}" >Registrate</a>
+
+{% endblock %}

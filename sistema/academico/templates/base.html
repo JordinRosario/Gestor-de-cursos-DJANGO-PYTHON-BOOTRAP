@@ -28,11 +28,26 @@
              
           </div>
         </div>
+        
+          <form action="{% url 'cerrarsesion' %}" class="container-fluid justify-content-start">
+            {% if  user.is_authenticated%}
+            
+            <div id="liveAlertPlaceholder"></div>
+            <button class="btn btn-sm btn-outline-danger ms-auto">Cerrar sesion</button>
+
+          </form>
+
+            {% else %}
+            <a class="btn btn-outline-dark me-2 ms-auto" href="{% url 'registrarte' %}" >Registrarse</a>
+            <a class="btn btn-outline-dark me-2" href="{% url 'iniciarsesion' %}">Inicar sesion</a>
+            {% endif %}
+          </form>
+        
       </nav>
 
         <div class="container py-4">
             {% block content %} 
-    
+          
             {% endblock %}
         </div>
     <!-- JavaScript Bundle with Popper -->

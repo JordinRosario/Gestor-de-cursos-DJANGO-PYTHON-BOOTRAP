@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block tittle %} Registrate {% endblock %}
+
+{%  block content %} 
+
+<form action="{% url 'registrarte' %}" method="POST">
+    {% csrf_token %}
+    {{error}}
+    {{form.as_p}}
+    <input type="submit" value="Enviar">
+</form>
+{% endblock %}

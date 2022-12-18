@@ -10,6 +10,8 @@ Home
 {% block content %}
 
 <div class="row">
+    {% if user.is_authenticated %}
+
     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
         <h2>Gestion de cursos</h2>
         <div class="card">
@@ -38,8 +40,18 @@ Home
             </div>
         </div>
     </div>
+    {%  else %}
+    <!-- !Inicia sesionpara agregar una materia -->
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
 
-    
+        <h1 class="py-2">Inicia sesion o registrate para agregar curso</h1>
+        <a class="btn btn-outline-dark me-2 ms-auto" href="{% url 'registrarte' %}" >Registrarse</a>
+        <a class="btn btn-outline-dark me-2" href="{% url 'iniciarsesion' %}">Inicar sesion</a>
+    </div>
+
+
+    {% endif %}
+
     <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
         <h1>Listado de curso</h1>
         <div class="table-resposive py-2">
@@ -60,8 +72,16 @@ Home
                         <td>{{ i.codigo }}</td>
                         <td>{{ i.nombre }}</td>
                         <td>{{ i.creditos }}</td>
+
+                        {% if user.is_authenticated %}
                         <td><a href="editarcurso/{{i.codigo}}" class="btn btn-info">Editar</a></td>
                         <td><a href="eliminarcurso/{{i.codigo}}" class="btn btn-danger">Eliminar</a></td>
+
+                        {% else %}
+                        <td><a href=" {% url 'iniciarsesion' %}" class="btn btn-info">Editar</a></td>
+                        <td><a href="{% url 'iniciarsesion' %}" class="btn btn-danger">Eliminar</a></td>
+
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -71,4 +91,4 @@ Home
 
 </div>
 
-{% endblock%}
+{% endblock %}
